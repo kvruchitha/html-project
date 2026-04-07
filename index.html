@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First JS Page</title>
+</head>
+<body>
+
+    <h1 id="heading">Hello World</h1>
+    <button onclick="changeText()">Click Me</button>
+
+    <!-- Connect JS file -->
+    <script src="script.js"></script>
+    <button id="btn">Click Me</button>
+    <script>
+        let button = document.getElementById("btn");
+
+button.addEventListener("click", function() {
+    alert("Button clicked using addEventListener!");
+});
+    </script>
+    <p id="demo">text</p>
+    <script>
+        document.getElementsByID("demo").innerhtml="hellow world";
+    </script>
+    <ul>
+  <li><b>Content returned:</b> innerText → Only visible text | innerHTML → HTML + text</li>
+  <li><b>HTML tags:</b> innerText → Ignores tags | innerHTML → Includes tags</li>
+  <li><b>CSS effect:</b> innerText → Respects CSS | innerHTML → Ignores CSS</li>
+  <li><b>Performance:</b> innerText → Slower | innerHTML → Faster</li>
+  <li><b>Usage:</b> innerText → Plain text | innerHTML → HTML content</li>
+  <li><b>Security:</b> innerText → Safe | innerHTML → Risky (XSS possible)</li>
+</ul>
+<p id="name">original</p>
+<button onclick="changeText()">chang text</button>
+<script>
+    functionchangetext(){
+        document.getElementById("name"),
+</script>
+<script></script>
+</body>
+</html>

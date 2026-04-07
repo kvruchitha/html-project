@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gene List</title>
+</head>
+<body>
+
+    <h2>Add Gene</h2>
+
+    <!-- Input box -->
+    <input type="text" id="gene" placeholder="Enter gene name">
+
+    <!-- Button -->
+    <button onclick="addgene()">Add Gene</button>
+
+    <!-- List -->
+    <ul id="genelist"></ul>
+
+    <script>
+        function addgene() {
+            let value = document.getElementById("gene").value.trim();
+
+            if (value === "") {
+                alert("Enter gene");
+                return;
+            }
+
+            // Create list item
+            let li = document.createElement("li");
+            li.innerText = value;
+            li.style.color = "blue";
+
+            // Add to list
+            document.getElementById("genelist").appendChild(li);
+
+            // Clear input
+            document.getElementById("gene").value = "";
+        }
+    </script>
+
+</body>
+</html>

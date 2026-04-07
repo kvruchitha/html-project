@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FASTA Parser</title>
+</head>
+<body>
+
+<h2>Upload FASTA File</h2>
+
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload</button>
+
+<div id="output"></div>
+
+<script>
+function uploadFile() {
+
+    let file = document.getElementById("fileInput").files[0];
+
+    let formData = new FormData();
+    formData.append("file", file);
+
+    fetch("http://127.0.0.1:8000/api/v1/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+
+        let outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = "Total Sequences: " + data.sequence_count + "<br><br>";
+
+        // 🔁 Get all sequences
+        fetch("http://127.0.0.1:8000/api/v1/sequences")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+
+            for (let i = 0; i < data.length; i++) {
+
+                let seq = data[i];
+
+                let block = document.createElement("div");
+
+                block.innerHTML =
+                    "ID: " + seq.id + "<br>" +
+                    "Sequence: " + seq.sequence + "<br>" +
+                    "Length: " + seq.length + "<br>" +
+                    "GC Content: loading...<br>" +
+                    "Reverse Complement: loading...<br><hr>";
+
+                outputDiv.appendChild(block);
+
+                // 🧪 GC CONTENT API CALL
+                fetch("http://127.0.0.1:8000/api/v1/sequences/" + seq.id + "/gc")
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(gcData) {
+                    block.innerHTML = block.innerHTML.replace(
+                        "GC Content: loading...",
+                        "GC Content: " + gcData.gc_content.toFixed(2) + "%"
+                    );
+                });
+
+                // 🔁 REVERSE COMPLEMENT API CALL
+                fetch("http://127.0.0.1:8000/api/v1/sequences/" + seq.id + "/reverse")
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(rcData) {
+                    block.innerHTML = block.innerHTML.replace(
+                        "Reverse Complement: loading...",
+                        "Reverse Complement: " + rcData.reverse
+                    );
+                });
+
+            }
+
+        });
+
+    });
+
+}
+</script>
+
+</body>
+</html>

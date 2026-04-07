@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> ncbi webpage</title>
+
+    </head>
+    <body>
+        <h1> DNA sequencing</h1>
+        <p> human whole genome</p> 
+        <a href="https://static.pubmed.gov/portal/portal.fcgi/">ncbi</a>
+    </body>
+    <form>
+        <label>name</label>
+        <input type="file">
+        <textarea rows="5"cols="40"></textarea> <br><br>
+        <button type="submit">analyze</button>
+        <input type="number" name="name" placeholder="enter ur name">   </form>
+<script>
+    function addgene() {
+        let value = document.getElementById("gene").value;
+        
+        if (value === "") {
+            alert("Please enter a gene name");
+        }
+    }
+</script>
+        </html>
